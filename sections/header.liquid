@@ -12,8 +12,9 @@
       <nav class='hidden md:flex space-x-10'>
         {% for link in section.settings.menu.links %}
           {% if link.links != blank %}
-            <div class='relative'>
-              <button @click='open = !open' class='inline-flex items-center'>
+            {% assign link_handle = link.handle | replace: '-', '_' %}
+            <div class='relative' x-data='{ {{ link_handle }}: false }'>
+              <button @click='{{ link_handle }} = !{{ link_handle }}' class='inline-flex items-center'>
                 {{ link.title }}
                 {% render 'icon-dropdown' %}
               </button>
@@ -25,8 +26,8 @@
                 x-transition:leave='transition ease-out duration-150'
                 x-transition:leave-start='opacity-100 translate-y-0'
                 x-transition:leave-end='opacity-0 -translate-y-6'
-                x-show='open'
-                @click.away='open = false'
+                x-show='{{ link_handle }}'
+                @click.away='{{ link_handle }} = false'
                 class='absolute z-10 -ml-5 transform px-2 w-screen max-w-md sm:px-0 lg:ml-0 lg:left-1/2 lg:-translate-x-1/2'
               >
                 <div class='shadow-lg border ring-black ring-opacity-5 overflow-hidden rounded-lg'>
