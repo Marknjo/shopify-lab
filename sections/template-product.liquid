@@ -1,10 +1,8 @@
-{% comment %}
-  {{ 'swiper.10.2.css' | asset_url | stylesheet_tag }}
-  <script defer src='{{ 'swiper.10.2.js' | asset_url }}'></script>
-{% endcomment %}
-
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css'>
-<script src='https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js'></script>
+<link
+  rel='stylesheet'
+  href='{{ 'swiper-bundle.min.css' | asset_url }}'
+>
+<script defer src='{{ 'swiper-bundle.min.js' | asset_url }}'></script>
 
 <style>
   .swiper-button-prev,
@@ -69,10 +67,6 @@
 
         {% for block in section.blocks %}
           {% case block.type %}
-              <script>
-                console.log(block);
-              </script>
-
             {% when 'vendor' %}
               <div class='my-3'>
                 <span class='text-xs text-gray-500'>{{ product.vendor }}</span>
@@ -250,27 +244,23 @@
 </script>
 
 <script>
-  /// This script fixes flash of unstyled content when page loads
+  function loadSwiper() {
+    if (Swiper) {
+      const swiper = new Swiper('.swiper', {
+        direction: 'horizontal',
+        loop: true,
+        pagination: {
+          el: '.swiper-pagination',
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      });
+    }
+  }
 
-  let domReady = (cb) => {
-    document.readyState === 'interactive' || document.readyState === 'complete'
-      ? cb()
-      : document.addEventListener('DOMContentLoaded', cb);
-  };
-
-  domReady(() => {
-    const swiper = new Swiper('.swiper', {
-      direction: 'horizontal',
-      loop: true,
-      pagination: {
-        el: '.swiper-pagination',
-      },
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-    });
-  });
+  document.addEventListener('DOMContentLoaded', loadSwiper);
 </script>
 
 {% schema %}
