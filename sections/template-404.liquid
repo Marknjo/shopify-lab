@@ -1,1 +1,22 @@
-<p>Example 404 page</p>
+<h1>{{ section.settings.title }}</h1>
+<p>{{ section.settings.subtext_title }}</p>
+
+{% schema %}
+{
+  "name": "404 Template",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "default": "404",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "subtext_title",
+      "default": "The page that you're looking for is not found",
+      "label": "Sub-Title"
+    }
+  ]
+}
+{% endschema %}
