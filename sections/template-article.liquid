@@ -1,4 +1,4 @@
-<article>
+<article class='py-8'>
   {% for block in section.blocks %}
     {% case block.type %}
       {% when 'article_title' %}
@@ -32,7 +32,21 @@
         </div>
 
       {% when 'featured_image' %}
-        <img src='{{ article.image | image_url }}' loading='lazy' alt='Image' width='auto' height='350'>
+        <div class='max-w-7xl bg-blue-100 rounded-lg mx-2 md:mx-auto overflow-hidden my-4'>
+          {% if article.image != blank %}
+            <img
+              class='w-full h-80 md:h-96 object-cover object-top p-5'
+              src='{{ article.image | image_url }}'
+              loading='lazy'
+              alt='Image'
+              width='auto'
+              height='350'
+            >
+          {% else %}
+            {% assign placeholder_img = 'lifestyle-2' %}
+            {{ placeholder_img | placeholder_svg_tag: 'w-full h-80 md:h-96 object-cover object-center p-5' }}
+          {% endif %}
+        </div>
 
       {% when 'article_content' %}
         <div>{{ article.content }}</div>
@@ -67,13 +81,13 @@
       "limit": 1
     },
     {
-      "type": "article_author",
-      "name": "Author",
+      "type": "article_published_date",
+      "name": "Published Date",
       "limit": 1
     },
     {
-      "type": "article_published_date",
-      "name": "Published Date",
+      "type": "article_author",
+      "name": "Author",
       "limit": 1
     },
     {

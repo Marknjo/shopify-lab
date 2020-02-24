@@ -7,11 +7,11 @@
         "title": {
           "type": "article_title"
         },
-        "author": {
-          "type": "article_author"
-        },
         "publish_date": {
           "type": "article_published_date"
+        },
+        "author": {
+          "type": "article_author"
         },
         "thumbnail": {
           "type": "featured_image"
