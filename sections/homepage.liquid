@@ -1,5 +1,11 @@
-<div class="text-center pt-3 flex flex-col items-center justify-center min-h-[100vh]">
-  <img src="{{ 'weeklyhow-logo.png' | asset_img_url: 'large' }}" class="w-[25%] pb-2">
+<div class='text-center pt-3 flex flex-col items-center justify-center min-h-[100vh]'>
+  <img
+    src='{{ 'weeklyhow-logo.png' | asset_img_url: 'large' }}'
+    loading='eager'
+    class='w-[25%] pb-2'
+    width='auto'
+    height='auto'
+  >
   <h1>Welcome to Shopify Theme Development course!</h1>
   <p>{% render 'homepage-text' %}</p>
 </div>
