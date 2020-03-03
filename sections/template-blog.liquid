@@ -1,1 +1,25 @@
-<h1 class='text-right'>This is blog post</h1>
+{% paginate blog.articles by 3 %}
+  {% for article in blog.articles %}
+    <div>
+      {% if article.image %}
+        <img
+          src='{{ article.image | image_url : height : 450 }}'
+          alt='{{ article.image.alt }}'
+          width='auto'
+          height='450'
+          loading='lazy'
+        >
+
+      {% else %}
+        {{ 'image' | placeholder_svg_tag: 'w-20' }}
+      {% endif %}
+
+      <h4>{{ article.title }}</h4>
+
+      {% if article.excerpt.size > 0 %}
+      {% else %}
+        <p>{{ article.content | strip_html | truncatewords: 15 }}</p>
+      {% endif %}
+    </div>
+  {% endfor %}
+{% endpaginate %}
