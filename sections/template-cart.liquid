@@ -12,7 +12,7 @@
     </div>
 
     <div class='max-w-6xl flex flex-col my-10 mx-auto'>
-      <form action='{{ routes.cart_url }}' method='post' novalidate>
+      <form action='{{ routes.cart_url }}' method='POST' novalidate>
         <table class='table-auto divide-gray-200 my-4 w-full'>
           <thead>
             <th class='px-6 py-3 text-left text-sm font-medium text-gray-500'>Product</th>
@@ -23,7 +23,7 @@
           <tbody>
             {% for item in cart.items %}
               <tr class='table-row'>
-                <td>
+                <td class='py-4 px-2 flex flex-col justify-center'>
                   <a href='{{ item.url }}'>
                     {% if item.image %}
                       <img
@@ -32,13 +32,14 @@
                         loading='lazy'
                         width='200'
                         height='auto'
-                        class='w-2- h-20 object-cover border'
+                        class='w-20 h-20 object-cover border'
                       >
                     {% else %}
                       {{ 'product-1' | placeholder_svg_tag: 'w-20 h-20 object-cover border' }}
                     {% endif %}
                   </a>
                 </td>
+
                 <td class='py-4 px-2 flex flex-col justify-center'>
                   <a href='{{ item.url }}' class='my-1'>{{ item.product.title | truncatewords: 4 }}</a>
 
@@ -49,7 +50,8 @@
                     >Remove</a
                   >
                 </td>
-                <td>
+
+                <td class='py-4 px-2'>
                   <input
                     type='number'
                     class='w-20 border p-2'
@@ -67,6 +69,39 @@
             {% endfor %}
           </tbody>
         </table>
+
+        <div class='flex flex-col md:flex-row items-center justify-betwee'>
+          <div class='w-full my-4'>
+            <div class='flex flex-col items-start'>
+              <label for='cart_notes' class='my-1'>Cart notes</label>
+              <textarea name='note' id='cart_notes' class='w-full md:max-w-lg resize-none border h-20'></textarea>
+            </div>
+          </div>
+
+          <div class='w-full my-4 md:w-80'>
+            <h3 class='text-xl'>Subtotal: {{ cart.total_price | money }}</h3>
+
+            <div class='my-2'>
+              <button
+                type='submit'
+                name='update'
+                class='w-full p-3 border border-gray-600 text-gray-600 font-medium hover:bg-gray-600 hover:text-white'
+              >
+                Update
+              </button>
+            </div>
+
+            <div class='my-2'>
+              <button
+                type='submit'
+                name='checkout'
+                class='w-full p-3 border border-gray-600 font-medium bg-gray-600 text-white'
+              >
+                Checkout
+              </button>
+            </div>
+          </div>
+        </div>
       </form>
     </div>
   </div>
