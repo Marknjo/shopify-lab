@@ -17,19 +17,44 @@
     {% for line_item in order.line_items %}
       <div class='w-full border border-gray-200 divide-y rounded-sm mb-4'>
         <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-12 p-4 md:p-12'>
-          <div class='w-full min-h-80 bg-gray-200 rounded-md overflow-hidden border'>
+          <div class='w-full h-80 min-h-80 bg-gray-200 rounded-md overflow-hidden border'>
             {% if line_item.image %}
               <img
-                src='{{ line_item.image | image_url: width: 280 }}'
+                src='{{ line_item.image | image_url: width: 320 }}'
                 alt='{{ line_item.image.alt }}'
                 loading='lazy'
-                width='280'
+                width='320'
                 height='auto'
-                class='w-full-h-full-object-center object-cover'
+                class='w-full h-full object-center object-cover'
               >
             {% else %}
-              {{ 'product-1' | placeholder_svg_tag: 'w-full-h-full-object-center object-cover' }}
+              {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-center object-cover' }}
             {% endif %}
+          </div>
+
+          <div>
+            <h2 class='text-xl font-medium mb-4'>{{ line_item.title | link_to: line_item.product.url }}</h2>
+
+            <table class='table-auto w-full mb-4'>
+              <tbody>
+                <tr>
+                  <td class='border border-gray-200 px-4 py-2'>Price</td>
+                  <td class='border border-gray-200 px-4 py-2'>{{ line_item.original_price | money }}</td>
+                </tr>
+                <tr>
+                  <td class='border border-gray-200 px-4 py-2'>Quantity</td>
+                  <td class='border border-gray-200 px-4 py-2'>{{ line_item.quantity }}</td>
+                </tr>
+                <tr>
+                  <td class='border border-gray-200 px-4 py-2'>Final Price</td>
+                  <td class='border border-gray-200 px-4 py-2'>{{ line_item.final_line_price | money }}</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class='text-gray-500 mb-4'>
+              {{ line_item.product.description | truncatewords: 15 }}
+            </div>
           </div>
         </div>
       </div>
