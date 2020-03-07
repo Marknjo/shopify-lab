@@ -12,21 +12,23 @@
           <div class='mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 xl:grid-cols-4 xl:gap-x-8'>
             {% for order in customer.orders %}
               <div class='relative'>
-                <div class='w-full min-w-80 bg-gray-200 rounded-md overflow-hidden lg:h-80'>
-                  {% if order.line_items.first.image %}
-                    <img
-                      src='{{ order.line_items.first.image | image_url: width: 320 }}'
-                      loading='lazy'
-                      alt='{{ order.line_items.first.image.alt }}'
-                      width='320'
-                      height='auto'
-                      class='w-full h-full object-center object-cover'
-                    >
+                <a href='{{ order.customer_url }}'>
+                  <div class='w-full min-w-80 bg-gray-200 rounded-md overflow-hidden lg:h-80'>
+                    {% if order.line_items.first.image %}
+                      <img
+                        src='{{ order.line_items.first.image | image_url: width: 320 }}'
+                        loading='lazy'
+                        alt='{{ order.line_items.first.image.alt }}'
+                        width='320'
+                        height='auto'
+                        class='w-full h-full object-center object-cover'
+                      >
 
-                  {% else %}
-                    {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-center object-cover' }}
-                  {% endif %}
-                </div>
+                    {% else %}
+                      {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-center object-cover' }}
+                    {% endif %}
+                  </div>
+                </a>
 
                 <div class='mt-4 flex items-start justify-between'>
                   <div>
