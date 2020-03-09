@@ -818,6 +818,14 @@ video {
   height: 100vh;
 }
 
+.h-3 {
+  height: 0.75rem;
+}
+
+.h-4 {
+  height: 1rem;
+}
+
 .min-h-\[100vh\] {
   min-height: 100vh;
 }
@@ -852,6 +860,19 @@ video {
 
 .w-1\/2 {
   width: 50%;
+}
+
+.w-max {
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.w-3 {
+  width: 0.75rem;
+}
+
+.w-4 {
+  width: 1rem;
 }
 
 .max-w-2xl {
