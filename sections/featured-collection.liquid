@@ -7,6 +7,12 @@
       {% endfor %}
     </div>
   </div>
+  <a
+    href='{{ routes.all_products_collection_url }}'
+    class='border border-gray-600 text-white bg-gray-600 px-8 py-3 block'
+  >
+    {{- section.settings.all_products -}}
+  </a>
 </section>
 
 {% schema %}
@@ -29,6 +35,12 @@
       "id": "featured_products_count",
       "default": 6,
       "label": "Featured Products Count"
+    },
+    {
+      "type": "text",
+      "id": "all_products",
+      "default": "View All Products &rarr;",
+      "label": "View Button Text"
     }
   ]
 }
