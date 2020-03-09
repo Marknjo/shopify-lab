@@ -132,6 +132,31 @@
         </div>
       {% endfor %}
     </div>
-    <div></div>
+    <div>
+      <h2 class='font-medium mb-4'>Payment Summary</h2>
+      <table class='table-auto w-full mb-4'>
+        <tbody>
+          <tr>
+            <td class='border border-gray-200 px-4 py-2'>Subtotal</td>
+            <td class='border border-gray-200 px-4 py-2'>{{ order.subtotal_price | money }}</td>
+          </tr>
+          <tr>
+            <td class='border border-gray-200 px-4 py-2'>Tax</td>
+            <td class='border border-gray-200 px-4 py-2'>{{ order.tax_price | money }}</td>
+          </tr>
+
+          <tr>
+            <td class='border border-gray-200 px-4 py-2'>Shipping</td>
+            <td class='border border-gray-200 px-4 py-2'>{{ order.shipping_price | money }}</td>
+          </tr>
+          <tr>
+            <td class='border border-gray-200 px-4 py-2 font-bold'>Total</td>
+            <td class='border border-gray-200 border-t-2 border-b-2 border-t-blue-600 border-b-blue-600 px-4 py-2'>
+              {{ order.total_price | money }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
