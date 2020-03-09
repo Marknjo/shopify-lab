@@ -11,12 +11,15 @@
       {% endfor %}
     </div>
   </div>
-  <a
-    href='{{ routes.all_products_collection_url }}'
-    class='border border-gray-600 text-white bg-gray-600 px-8 py-3 block'
-  >
-    {{- section.settings.all_products -}}
-  </a>
+
+  <div class='flex justify-end w-full md:max-w-6xl px-3 mx-auto'>
+    <a
+      href='{{ section.settings.collection_url }}'
+      class='border border-gray-600 text-white bg-gray-600 hover:bg-gray-800 transition-all duration-150 ease-in px-8 py-3 block'
+    >
+      {{- section.settings.all_products -}}
+    </a>
+  </div>
 </section>
 
 {% schema %}
@@ -45,6 +48,12 @@
       "id": "all_products",
       "default": "View All Products &rarr;",
       "label": "View Button Text"
+    },
+    {
+      "type": "url",
+      "id": "collection_url",
+      "default": "/collections/all",
+      "label": "Collection Url"
     }
   ],
   "presets": [
