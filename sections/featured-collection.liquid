@@ -4,6 +4,10 @@
     <div class='grid grid-cols-1 md:grid-cols-3 gap-4'>
       {% for product in section.settings.featured_collection.products limit: section.settings.featured_products_count %}
         {% render 'product-card', product: product %}
+      {% else %}
+        {% for item in (1..6) %}
+          {% render 'product-card-placeholder' %}
+        {% endfor %}
       {% endfor %}
     </div>
   </div>

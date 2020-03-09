@@ -1,0 +1,18 @@
+<article class='w-full h-full py-6 px-3'>
+  <div class='border bg-white shadow-lg rounded-lg overflow-hidden'>
+    <a href='{{ product.url }}'>
+      {{
+        'product-1'
+        | placeholder_svg_tag: 'w-full h-full object-cover bg-gray-100 transition duration-500 ease-in-out transform hover:scale-105'
+      }}
+    </a>
+
+    <div class='flex flex-col p-4'>
+      <span class='text-sm text-gray-400'>Vendor</span>
+
+      <a href='#' class='text-gray-700 uppercase font-medium'>Placeholder Title</a>
+
+      <p class='text-gray-500 mb-4 mt-2'>{{ '399' | money }}</p>
+    </div>
+  </div>
+</article>
