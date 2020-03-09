@@ -56,6 +56,21 @@
               {{ line_item.product.description | truncatewords: 15 }}
             </div>
           </div>
+
+          <div>
+            <h2 class='font-medium mb-4'>Delivery address</h2>
+            <div class='text-gray-500 mb-4'>
+              <div>
+                <p><strong>Address 1</strong>: {{ order.shipping_address.address1 }}</p>
+                <p><strong>Address 2</strong>: {{ order.shipping_address.address2 }}</p>
+                <p><strong>Street</strong>: {{ order.shipping_address.street }}</p>
+                <p><strong>Province</strong>: {{ order.shipping_address.province }}</p>
+                <p><strong>City</strong>: {{ order.shipping_address.city }}</p>
+                <p><strong>Zip</strong>: {{ order.shipping_address.zip }}</p>
+                <p><strong>Country</strong>: {{ order.shipping_address.country }}</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     {% endfor %}
