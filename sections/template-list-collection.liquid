@@ -3,7 +3,7 @@
 
   <div class='max-w-6xl mx-auto my-3'>
     <div class='grid grid-cols-1 md:grid-cols-3 gap-3'>
-      {% for collection in collections %}
+      {% for collection in collections limit: section.settings.collections_in_page %}
         <article class='w-full py-6 px-3'>
           <a href='{{ collection.url }}'>
             <span class='h-80 overflow-hidden block'>
@@ -33,3 +33,18 @@
     </div>
   </div>
 </section>
+
+{% schema %}
+{
+  "name": "List Collection Template",
+  "settings": [
+    {
+      "type": "number",
+      "id": "collections_in_page",
+      "default": 6,
+      "label": "Max collections in page",
+      "info": "Control maximum number of collections to display in this template"
+    }
+  ]
+}
+{% endschema %}
