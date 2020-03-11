@@ -1,21 +1,35 @@
-{% for collection in collections %}
-  <div class='w-full py-6 px-3'>
-    <a href='{{ collection.url }}'>
-      <span class='h-80 overflow-hidden block'>
-        {% if collection.featured_image != blank %}
-          {% assign collection_image_url = collection.featured_image %}
-        {% else %}
-          {% assign collection_image_url = collection.products.first.image %}
-        {% endif %}
+<section class='flex flex-col items-center my-8'>
+  <h1 class='text-xl font-medium'>{{ section.settings.title }}</h1>
 
-        <img
-          src='{{ collection_image_url | image_url: height: 250 }}'
-          alt='{{ collection.title }}'
-          loading='lazy'
-          width='auto'
-          height='250'
-        >
-      </span>
-    </a>
+  <div class='max-w-6xl mx-auto my-3'>
+    <div class='grid grid-cols-1 md:grid-cols-3 gap-3'>
+      {% for collection in collections %}
+        <article class='w-full py-6 px-3'>
+          <a href='{{ collection.url }}'>
+            <span class='h-80 overflow-hidden block'>
+              {% if collection.featured_image != blank %}
+                {% assign collection_image_url = collection.featured_image %}
+              {% else %}
+                {% assign collection_image_url = collection.products.first.image %}
+              {% endif %}
+
+              <img
+                src='{{ collection_image_url | image_url: height: 250 }}'
+                alt='{{ collection.title }}'
+                loading='lazy'
+                width='auto'
+                height='250'
+                class='w-full h-full object-cover transition duration-500 ease-in-out transform hover:scale-105'
+              >
+            </span>
+          </a>
+          <div class='p-4 bg-gray-100'>
+            <h4 class='text-xl'>
+              {{ collection.title | upcase | truncate: 12 }}
+            </h4>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
   </div>
-{% endfor %}
+</section>
