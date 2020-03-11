@@ -1,7 +1,18 @@
 <section class='px-4 py-8'>
-  {% paginate collection.products by section.settings.products_per %}
-    <h1 class='text-3xl text-center'>{{ collection.title }}</h1>
+  <div class='grid grid-cols-3 w-full md:max-w-6xl justify-center px-3 mx-auto'>
+    <a
+      href='{{ routes.collections_url }}'
+      class='col-span-1 justify-self-start border-b border-b-gray-600 text-gray-600 hover:text-gray-800 transition-all duration-150 ease-in px-2 py-1 inline-block'
+    >
+      &larr; Collections
+    </a>
 
+    <h1 class='col-span-2 text-3xl text-center inline-block justify-self-end md:justify-self-center'>
+      {{ collection.title }}
+    </h1>
+  </div>
+
+  {% paginate collection.products by section.settings.products_per %}
     <div class='max-w-6xl mx-auto'>
       <div class='grid grid-cols-1 md:grid-cols-3 gap-4'>
         {% for product in collection.products %}
