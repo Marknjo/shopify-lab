@@ -262,6 +262,35 @@
         }
       }
     }
+
+    customerAddressesSelector() {
+      const addressesSelector = document.querySelectorAll('select[data-country-selector]');
+
+      if (addressesSelector.length < 1) return;
+
+      addressesSelector.forEach((select) => {
+        select.addEventListener('change', function (e) {
+          const provinces = this.options[this.selectedIndex].dataset.provinces;
+          const arrayOfProvinces = JSON.parse(provinces);
+
+          const provinceSelector = document.querySelector(`#address_province_${this.dataset.id}`);
+
+          if (arrayOfProvinces.length < 1) {
+            provinceSelector.setAttribute('disabled', 'disable');
+          } else {
+            provinceSelector.innerHTML = '';
+          }
+
+          let options = '';
+
+          for (let i = 0; i < arrayOfProvinces.length; i++) {
+            options += `<option value="${arrayOfProvinces[i][0]}">${arrayOfProvinces[i][0]}</option>`;
+          }
+
+          provinceSelector.innerHTML = options;
+        });
+      });
+    }
   }
 
   const customerAddress = new CustomerAddress();
