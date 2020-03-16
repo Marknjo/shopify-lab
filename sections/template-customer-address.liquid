@@ -189,7 +189,7 @@
 
   <div>
     {% paginate customer.addresses by 12 %}
-      <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-12 p-4 md:p-12'>
+      <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-12 p-4 md:p-12' id='addresses-container'>
         {% for address in customer.addresses %}
           <div x-data='{ address_{{ form.id }}: false }'>
             <div class='relative flex flex-col text-center border '>
@@ -208,8 +208,18 @@
                 >
                   Edit
                 </button>
-                <button class='w-full text-xs font-medium text-gray-700 border py-2'>Delete</button>
+                <button
+                  data-url='{{ address.url }}'
+                  data-delete-address='{{ form.id }}'
+                  class='w-full text-xs font-medium text-gray-700 border py-2'
+                >
+                  Delete
+                </button>
               </div>
+
+              <form action='{{ address.url }}' method='post'>
+                <input type='hidden' name='_method' value='delete'>
+              </form>
             </div>
 
             {% comment %} Edit form {% endcomment %}
@@ -414,6 +424,31 @@
     constructor() {
       this.initCustomerAddress();
       this.customerAddressesSelector();
+      this.initDeleteAddressButtons();
+    }
+
+    initDeleteAddressButtons() {
+      const addressesContainerEl = document.getElementById('addresses-container');
+
+      function deleteAddress(event) {
+        const btnEl = event.target;
+        if (btnEl.hasAttribute('data-delete-address')) {
+          const url = btnEl.dataset.url;
+
+          const canDelete = window.confirm('You are about to delete this address, do you really want to delete it?');
+
+          console.log({ canDelete });
+
+          canDelete && document.querySelector(`form[action="${url}"]`).submit();
+        }
+
+        event.stopPropagation();
+      }
+
+      addressesContainerEl.addEventListener('click', function (event) {
+        deleteAddress(event);
+        addressesContainerEl.removeEventListener('click', deleteAddress);
+      });
     }
 
     initCustomerAddress() {
