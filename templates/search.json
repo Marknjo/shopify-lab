@@ -5,5 +5,7 @@
       "type": "template-search"
     }
   },
-  "order": ["template"]
+  "order": [
+    "template"
+  ]
 }

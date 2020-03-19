@@ -5,5 +5,7 @@
       "type": "page-template"
     }
   },
-  "order": ["template"]
+  "order": [
+    "template"
+  ]
 }
