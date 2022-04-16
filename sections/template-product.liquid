@@ -1,3 +1,32 @@
+{% comment %}
+  {{ 'swiper.10.2.css' | asset_url | stylesheet_tag }}
+  <script defer src='{{ 'swiper.10.2.js' | asset_url }}'></script>
+{% endcomment %}
+
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css'>
+<script src='https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js'></script>
+
+<style>
+  .swiper-button-prev,
+  .swiper-button-next {
+    color: black;
+
+    height: 20px;
+  }
+
+  .swiper-button-prev::after,
+  .swiper-button-next::after {
+    font-size: 20px;
+  }
+  .swiper-pagination {
+    color: black;
+    bottom: 0 !important;
+  }
+  .swiper-pagination-bullet-active {
+    background: black !important;
+  }
+</style>
+
 <div class='max-w-6xl my-8'>
   <div class='grid grid-cols-1 md:grid-cols-2 gap-3'>
     <div class='product--medias'>
@@ -8,8 +37,50 @@
           </div>
         {% endfor %}
       </div>
+
+      <div class='md:hidden'>
+        <div class='swiper h-[22rem]'>
+          <div class='swiper-wrapper'>
+            {% for media in product.media %}
+              <div class='swiper-slide'>
+                <h-80 class='overflow-hidden p-2'>
+                  {% render 'product-media', media: media %}
+                </h-80>
+              </div>
+            {% endfor %}
+          </div>
+
+          <div class='swiper-pagination'></div>
+          <div class='swiper-button-prev'></div>
+          <div class='swiper-button-next'></div>
+        </div>
+      </div>
     </div>
 
     <div class='product--information'></div>
   </div>
 </div>
+
+<script defer>
+  /// This script fixes flash of unstyled content when page loads
+
+  let domReady = (cb) => {
+    document.readyState === 'interactive' || document.readyState === 'complete'
+      ? cb()
+      : document.addEventListener('DOMContentLoaded', cb);
+  };
+
+  domReady(() => {
+    const swiper = new Swiper('.swiper', {
+      direction: 'horizontal',
+      loop: true,
+      pagination: {
+        el: '.swiper-pagination',
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  });
+</script>
