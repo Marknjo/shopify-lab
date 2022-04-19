@@ -186,7 +186,13 @@
       this.addEventListener('change', this.onVariantChange);
     }
 
-    onVariantChange() {}
+    onVariantChange() {
+      this.getSelectedOptions();
+    }
+
+    getSelectedOptions() {
+      this.options = Array.from(this.querySelectorAll('select'), (select) => select.value);
+    }
   }
 
   customElements.define('variant-selector', VariantSelector);
