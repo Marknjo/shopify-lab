@@ -64,7 +64,7 @@
     </div>
 
     <div class='product--information sticky top-5 p-2'>
-      {% form 'product', product %}
+      {% form 'product', product, id: 'product-form', novalidate: 'novalidate' %}
         <input type='hidden' name='id' value='{{ selected_variant.id }}'>
 
         {% for block in section.blocks %}
@@ -84,7 +84,7 @@
               </div>
 
             {% when 'price' %}
-              <div class='my-3'>
+              <div class='my-3' id='price-{{ section.id }}'>
                 <span class='text-base text-gray-500 line-through'>
                   {{ selected_variant.compare_at_price | money }}
                 </span>
@@ -100,7 +100,7 @@
             {% when 'variant_selector' %}
               <div class='my-3'>
                 {% unless product.has_only_default_variant %}
-                  <div data-url='{{ product.url }}' data-section='{{ section.id }}'>
+                  <variant-selector data-url='{{ product.url }}' data-section='{{ section.id }}'>
                     {% for option in product.options_with_values %}
                       <label for='Option-{{ section.id }}-{{ forloop.index0 }}'>{{ option.name }}</label>
 
@@ -123,8 +123,12 @@
                           {% endfor %}
                         </select>
                       </div>
+
+                      <script type='application/json'>
+                        {{ product.variants | json }}
+                      </script>
                     {% endfor %}
-                  </div>
+                  </variant-selector>
                 {% endunless %}
               </div>
 
@@ -174,7 +178,21 @@
   </div>
 </div>
 
-<script defer>
+<script>
+  class VariantSelector extends HTMLElement {
+    constructor() {
+      super();
+
+      this.addEventListener('change', this.onVariantChange);
+    }
+
+    onVariantChange() {}
+  }
+
+  customElements.define('variant-selector', VariantSelector);
+</script>
+
+<script>
   /// This script fixes flash of unstyled content when page loads
 
   let domReady = (cb) => {
