@@ -18,14 +18,18 @@
   </div>
 
   {% if search.performed and search.results.size > 0 %}
-    {% for item in search.results %}
-      {% case item.object_type %}
-        {% when 'product' %}
-          {% render 'product-card', product: item %}
-        {% else %}
+    <div class='max-w-6xl mx-auto'>
+      <div class='grid grid-cols-1 md:grid-cols-3 gap-4'>
+        {% for item in search.results %}
+          {% case item.object_type %}
+            {% when 'product' %}
+              {% render 'product-card', product: item %}
+            {% else %}
 
-      {% endcase %}
-    {% endfor %}
+          {% endcase %}
+        {% endfor %}
+      </div>
+    </div>
 
   {% else %}
     <div class='text-center my-4'>
