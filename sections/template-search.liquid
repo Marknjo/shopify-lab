@@ -17,13 +17,23 @@
     </form>
   </div>
 
-  {% for item in search.results %}
-    {% case item.object_type %}
-      {% when 'product' %}
-        {% render 'product-card', product: item %}
-      {% else %}
+  {% if search.performed and search.results.size > 0 %}
+    {% for item in search.results %}
+      {% case item.object_type %}
+        {% when 'product' %}
+          {% render 'product-card', product: item %}
+        {% else %}
 
-    {% endcase %}
-  {% endfor %}
+      {% endcase %}
+    {% endfor %}
+
+  {% else %}
+    <div class='text-center my-4'>
+      <p>
+        No Results found for the search term: <strong>{{ search.terms }}</strong>. Please use a different keyword!
+      </p>
+    </div>
+  {% endif %}
+
   {% render 'pagination', pagination: paginate %}
 {% endpaginate %}
