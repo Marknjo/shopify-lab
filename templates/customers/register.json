@@ -1,0 +1,9 @@
+{
+  "name": "Customer Register Form",
+  "sections": {
+    "template": {
+      "type": "template-register"
+    }
+  },
+  "order": ["template"]
+}
