@@ -2,7 +2,7 @@
   "name": "Login Page",
   "sections": {
     "template": {
-      "type": "template-login"
+      "type": "template-customer-login"
     }
   },
   "order": ["template"]
