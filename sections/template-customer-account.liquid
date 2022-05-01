@@ -7,11 +7,25 @@
       <div class='w-full my-6 md:my-12'>
         <h2 class='text-xl font-bold text-gray-700'>Order history</h2>
 
-        <div>
+        <div class='mt-6 grid grid-cols-1 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8'>
           {% paginate customer.orders by 12 %}
             {% for order in customer.orders %}
               <div class='relative'>
-                {{ order.name }}
+                <div class='w-full min-80 bg-gray-200 rounded-md overflow-hidden lg:h-80'>
+                  {% if order.line_items.first.image %}
+                    <img
+                      src='{{ order.line_items.first.image | image_url }}'
+                      loading='lazy'
+                      alt='{{ order.line_items.first.image.alt }}'
+                      width='auto'
+                      height='auto'
+                      class='w-full h-full object-center object-cover'
+                    >
+
+                  {% else %}
+                    {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-center object-cover' }}
+                  {% endif %}
+                </div>
               </div>
             {% endfor %}
           {% endpaginate %}
